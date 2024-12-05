@@ -1,6 +1,6 @@
-To run the project, navigate to the directory of the project in the command line, and make:
+To run the project, navigate to the directory of the project in the command line, make sure the Eigen folder is contained within the same directory, and make:
   >> make
 Then, to run the program, make sure the input file with the code words is in the same directory, then enter ./main with the name of the input file in the next argument.
 For example, for an input file nameed inputFile.txt, enter:
   >> ./main inputFile.txt
-It will then return the decoded Hamming 7,4 words on the command line.
+It will then print the decoded Hamming 7,4 words on the command line.
