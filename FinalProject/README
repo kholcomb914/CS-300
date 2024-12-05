@@ -1,4 +1,6 @@
-To run the project, first make sure the text file with the code words is contained within the project directory.
+To run the project, first make sure the text file with the code words is contained within the project directory, and clone the eigen library and the google test framework from github:
+  >> git clone https://gitlab.com/libeigen/eigen.git
+
 Then, navigate to the directory in the command line, and create a build directory to navigate to:
   >> mkdir build
   >> cd build
