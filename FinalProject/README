@@ -1,6 +1,12 @@
-To run the project, navigate to the directory of the project in the command line, make sure the Eigen folder is contained within the same directory, and make:
+To run the project, first make sure the text file with the code words is contained within the project directory.
+Then, navigate to the directory in the command line, and create a build directory to navigate to:
+  >> mkdir build
+  >> cd build
+Run cmake in the above directory:
+  >> cmake ..
+Build the project files:
   >> make
-Then, to run the program, make sure the input file with the code words is in the same directory, then enter ./main with the name of the input file in the next argument.
-For example, for an input file nameed inputFile.txt, enter:
-  >> ./main inputFile.txt
-It will then print the decoded Hamming 7,4 words on the command line.
+Run the project with ./run, using the name of the input file as the second argument.
+For example, if the input file is named inputValues.txt and is contained in the project folder above the build directory:
+  >> ./run ../inputValues.txt
+And the program will decode the code words and print the corrected words, as well as if there are any errors.
