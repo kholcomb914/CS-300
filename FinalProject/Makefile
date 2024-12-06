@@ -2,7 +2,7 @@ OBJS	= main.o hamming.o
 SOURCE	= main.cpp hamming.cpp
 HEADER	= hamming.hpp
 OUT	= main
-FLAGS	= -g -c -std=c++11
+FLAGS	= -g -c -std=c++14
 LDFLAGS	=
 CC	= g++
 
