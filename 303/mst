@@ -1,0 +1,85 @@
+import heapq
+
+class Vertex:
+    WHITE = 0
+    GRAY = 1
+    BLACK = 2
+
+    def __init__(self, value):
+        self.value = value
+        self.color = Vertex.WHITE
+        self.dist = float('inf')  # Key value for Prim's algorithm
+        self.parent = None  # To store the parent of the vertex in the MST
+        self.adjacent = []  # List of tuples (neighbor, weight)
+
+    def __lt__(self, other):
+        return self.dist < other.dist  # For priority queue comparison
+
+class Graph:
+    def __init__(self):
+        self.vertices = {}
+        self.adjacencyList = {}
+
+    def addVertex(self, value):
+        if value not in self.vertices:
+            vertex = Vertex(value)
+            self.vertices[value] = vertex
+            self.adjacencyList[value] = vertex  # Ensure adjacency list is updated
+
+    def addEdge(self, start, end, weight):
+        self.addVertex(start)
+        self.addVertex(end)
+        self.adjacencyList[start].adjacent.append((end, weight))
+        self.adjacencyList[end].adjacent.append((start, weight))  # For undirected graph
+
+    def printGraph(self):
+        for vertex in self.adjacencyList.values():
+            print(vertex.value, ": [", sep="", end="")
+            print(", ".join(f"({adj[0]}, {adj[1]})" for adj in vertex.adjacent), end="")
+            print("]")
+
+class Prims:
+    def __init__(self, graph):
+        self.graph = graph
+
+    def primMST(self, start_value):
+        # Initialize all vertices
+        for vertex in self.graph.vertices.values():
+            vertex.dist = float('inf')
+            vertex.parent = None
+        
+        # Start vertex
+        start_vertex = self.graph.vertices[start_value]
+        start_vertex.dist = 0
+        
+        # Priority queue to hold vertices based on their key values
+        priority_queue = []
+        heapq.heappush(priority_queue, start_vertex)
+
+        while priority_queue:
+            # Extract the vertex with the minimum key value
+            u = heapq.heappop(priority_queue)
+
+            # Iterate through the adjacent vertices of u
+            for v_value, weight in u.adjacent:
+                v = self.graph.vertices[v_value]
+                # If v is still in the priority queue and the weight is less than its current key
+                if v in priority_queue and weight < v.dist:
+                    v.parent = u  # Update parent
+                    v.dist = weight  # Update key value
+                    # Update the priority queue
+                    heapq.heappush(priority_queue, v)
+
+        # Print the edges of the MST
+        self.printMST()
+
+    def printMST(self):
+        print("Edge \tWeight")
+        for vertex in self.graph.vertices.values():
+            if vertex.parent is not None:
+                print(f"{vertex.parent.value} - {vertex.value} \t{vertex.dist}")
+
+# Example usage
+g = Graph()
+g.addEdge('A', 'B', 1)
+g.addEdge('A', 'C'
